@@ -1,22 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../App';
+import BookingData from '../BookingData/BookingData';
 import Sidebar from '../Sidebar/Sidebar';
 
 const BookingList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
-    const [product, setProduct] = useState([])
-    // const { email } = loggedInUser
-    
-    useEffect(() =>{
-        fetch('http://localhost:5000/bookingList')
-        .then(res => res.json())
-        .then(data => console.log(data))
-    },[])
 
-    // const filteredOrder = (data) => {
-    //     const filterData = data.filter((order) => order.email == loggedInUser.email)
-    //     setOrderedProducts(filterData)
-    // }
+    
+    const [booking, setBooking] = useState([])
+
+    useEffect(() =>{
+        fetch(`https://peaceful-gorge-97236.herokuapp.com/bookingList?data.email=+loggedInUser.email`)
+        .then(res => res.json())
+        .then(data => filteredOrder(data))
+    },[])
+    console.log("From Booking List:",loggedInUser.email)
+
+    const filteredOrder = (booking) => {
+        console.log("Booking Data", booking[0].data.email)
+        const filterData = booking.filter((order) => order.data.email === loggedInUser.email)
+        console.log("FilterData:", filterData)
+        setBooking(filterData)
+    }
 
     return (
         <div className="row">
@@ -25,6 +30,9 @@ const BookingList = () => {
             </div>
             <div className="col-md-10 col-sm-12 col-12 d-flex justify-content-center mt-5 pt-5 pb-5">
                 <h1>This is Booking List</h1>
+                {
+                    booking.map(book => <BookingData book={book}></BookingData>)
+                }
             </div>
         </div>
     );

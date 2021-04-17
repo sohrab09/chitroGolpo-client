@@ -6,10 +6,13 @@ import Home from './components/Home/Home/Home';
 import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import Booking from './components/Dashboard/Booking/Booking';
 import AddService from './components/Dashboard/AddService/AddService';
-import Login from './components/Home/Login/Login'
+import Login from './components/Home/Login/Login';
+// import PrivateRoute from './components/Home/PrivateRoute/PrivateRoute';
 import BookingList from './components/Dashboard/BookingList/BookingList';
 import AddReview from './components/Dashboard/AddReview/AddReview';
 import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
+import OrderList from './components/Dashboard/OrderList/OrderList';
+import ManageService from './components/Dashboard/ManageService/ManageService';
 export const UserContext = createContext();
 
 
@@ -42,6 +45,12 @@ function App() {
         </Route>
         <Route path="/makeAdmin">
           <MakeAdmin/>
+        </Route>
+        <Route path="/orderList">
+          <OrderList/>
+        </Route>
+        <Route path="/manageService">
+          <ManageService/>
         </Route>
       </Switch>
     </Router>

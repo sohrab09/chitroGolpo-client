@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { UserContext } from "../../../App";
 import PaymentProcess from "../PaymentProcess/PaymentProcess";
 import Sidebar from "../Sidebar/Sidebar";
 import './Booking.css';
 
 const Booking = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const {id} = useParams()
     console.log(id)
-    const [data,setData] = useState({})
+    const [serviceData,setServiceData] = useState({})
+
     useEffect(()=>{
-        fetch(`http://localhost:5000/serviceBook/${id}`)
+        fetch(`https://peaceful-gorge-97236.herokuapp.com/serviceBook/${id}`)
         .then(res=>res.json())
         .then(data=>{
-            setData(data);
+            setServiceData(data);
         })  
   },[])
-  console.log(data)
+  console.log(serviceData)
+  const {name, price} = serviceData
 
   const [serviceInfo, setServiceInfo] = useState({})
+  console.log(serviceInfo, loggedInUser)
+
+  const newService = { name, price, ...loggedInUser };
+  console.log("Name Service:" , newService)
   const handleBlur = (e) => {
-    const newService = { ...serviceInfo };
     newService[e.target.name] = e.target.value;
     setServiceInfo(newService);
 };
@@ -33,19 +40,19 @@ const Booking = () => {
                     <form>
                         <h1 className="text-secondary mb-5">Booking Item</h1>
                         <div class="user-box">
-                            <input onBlur={handleBlur} type="text" name="name" required="" />
+                            <input value={loggedInUser.userName} onBlur={handleBlur} type="text" required="" />
                             <label>Username</label>
                         </div>
                         <div class="user-box">
-                            <input onBlur={handleBlur} type="text" name="email" required="" />
-                            <label>Email</label>
+                            <input value={serviceData.price} type="text" name="price" required="" />
+                            <label>Price</label>
                         </div>
                         <div class="user-box">
-                            <input onBlur={handleBlur} type="text" name="service" required="" value={data.name}/>
+                            <input type="text" name="service" required="" value={serviceData.name}/>
                             <label>Service</label>
                         </div>
                     </form>
-                        <PaymentProcess serviceInfo={serviceInfo}/>
+                        <PaymentProcess newService={newService}/>
                 </div>
             </div>
         </div>

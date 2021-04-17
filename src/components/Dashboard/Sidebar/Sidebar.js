@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Sidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt,  faHome, faUserShield, faShoppingCart, faList, faStarHalfAlt, faSort, faTasks } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../Image/logo.png';
+import { faHome, faUserShield, faShoppingCart, faList, faStarHalfAlt, faSort, faTasks } from '@fortawesome/free-solid-svg-icons';
 import { faAddressCard } from '@fortawesome/free-regular-svg-icons'
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../App';
 
 const Sidebar = () => {
+
+const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [isAdmin, setIsAdmin] = useState(false)
+    useEffect(() =>{
+        const url = 'http://localhost:5000/isAdmin'
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({email:loggedInUser.email})
+        })
+            .then(res => res.json())
+            .then(data => setIsAdmin(data))
+    },[])
     return (
         <div className="sidebar d-flex flex-column justify-content-between col-md-2 py-5 px-4" style={{ height: "100vh" }}>
+            <img className="mb-5" src={logo} alt=""/>
             <ul className="list-unstyled">
                 <li>
                     <Link to="/" className="text-white">
@@ -30,7 +48,10 @@ const Sidebar = () => {
                             <FontAwesomeIcon icon={faStarHalfAlt} /> <span>Review</span>
                         </Link>
                     </li>
-                    <li>
+                    {
+                        isAdmin && 
+                        <div>
+                            <li>
                         <Link to="/orderList" className="text-white" >
                             <FontAwesomeIcon icon={faSort} /> <span>Order List</span>
                         </Link>
@@ -50,11 +71,10 @@ const Sidebar = () => {
                             <FontAwesomeIcon icon={faTasks} /> <span>Manage Service</span>
                         </Link>
                     </li>
+                        </div>
+                    }
                 </div>
             </ul>
-            <div>
-                <Link to="/" className="text-white"><FontAwesomeIcon icon={faSignOutAlt} /> <span>Logout</span></Link>
-            </div>
         </div>
     );
 };

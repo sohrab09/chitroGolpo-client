@@ -1,14 +1,14 @@
 import React from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const SimpleCardForm = ({ serviceInfo }) => {
-    console.log(serviceInfo)
+const SimpleCardForm = ({ newService }) => {
+    console.log(newService)
     const stripe = useStripe();
     const elements = useElements();
 
     const handleOrder = (paymentId) => {
-        const order = { ...serviceInfo, paymentId }
-        fetch('http://localhost:5000/bookOrder', {
+        const order = { ...newService, paymentId }
+        fetch('https://peaceful-gorge-97236.herokuapp.com/bookOrder', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json; charset=UTF-8',

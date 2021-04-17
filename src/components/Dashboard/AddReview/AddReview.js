@@ -17,7 +17,7 @@ const AddReview = () => {
             rating: data.rating,
             imageURL: imageURL
         };
-        const url = 'http://localhost:5000/addReview'
+        const url = 'https://peaceful-gorge-97236.herokuapp.com/addReview'
         fetch(url, {
             method: 'POST',
             headers: {

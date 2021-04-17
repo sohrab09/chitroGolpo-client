@@ -19,7 +19,7 @@ const AddReview = () => {
             imageURL: imageURL
         };
  
-        const url =`http://localhost:5000/addReview`
+        const url =`https://peaceful-gorge-97236.herokuapp.com/addReview`
  
         console.log(serviceDate)
  
