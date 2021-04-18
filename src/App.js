@@ -7,7 +7,7 @@ import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import Booking from './components/Dashboard/Booking/Booking';
 import AddService from './components/Dashboard/AddService/AddService';
 import Login from './components/Home/Login/Login';
-// import PrivateRoute from './components/Home/PrivateRoute/PrivateRoute';
+import PrivateRoute from './components/Home/PrivateRoute/PrivateRoute';
 import BookingList from './components/Dashboard/BookingList/BookingList';
 import AddReview from './components/Dashboard/AddReview/AddReview';
 import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
@@ -25,33 +25,33 @@ function App() {
         <Route exact path="/">
           <Home/>
         </Route>
-        <Route path="/service/:id">
+        <PrivateRoute path="/service/:id">
           <Booking/>
-        </Route>
+        </PrivateRoute>
         <Route path="/login">
           <Login/>
         </Route>
-        <Route path="/addService">
+        <PrivateRoute path="/addService">
         <AddService/>
-        </Route>
-        <Route path="/dashboard">
+        </PrivateRoute>
+        <PrivateRoute path="/dashboard">
           <Dashboard/>
-        </Route>
-        <Route path="/bookingList">
+        </PrivateRoute>
+        <PrivateRoute path="/bookingList">
           <BookingList/>
-        </Route>
-        <Route path="/addReview">
+        </PrivateRoute>
+        <PrivateRoute path="/addReview">
           <AddReview/>
-        </Route>
-        <Route path="/makeAdmin">
+        </PrivateRoute>
+        <PrivateRoute path="/makeAdmin">
           <MakeAdmin/>
-        </Route>
-        <Route path="/orderList">
+        </PrivateRoute>
+        <PrivateRoute path="/orderList">
           <OrderList/>
-        </Route>
-        <Route path="/manageService">
+        </PrivateRoute>
+        <PrivateRoute path="/manageService">
           <ManageService/>
-        </Route>
+        </PrivateRoute>
       </Switch>
     </Router>
     </UserContext.Provider>

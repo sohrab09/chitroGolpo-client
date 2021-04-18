@@ -6,20 +6,13 @@ import Sidebar from '../Sidebar/Sidebar';
 const ManageService = () => {
     const [manageService, setManageService] = useState([]);
 
-    const fetchManageService = () => {
-        fetch('http://localhost:5000/services')
-            .then(res => res.json())
-            .then(data => {
-                setManageService(data);
-            })
-    }
     // useEffect(() => {
     //     fetchManageService()
     // }, [])
 
     // const handleDelete = (id) => {
     //     console.log("ID:", id)
-    //     fetch(`http://localhost:5000/service/${id}`, {
+    //     fetch(`https://peaceful-gorge-97236.herokuapp.com/service/${id}`, {
     //         method: "DELETE"
     //     })
 
@@ -30,20 +23,23 @@ const ManageService = () => {
 
     // Niam vai 
 
-    useEffect(() =>
-    {
-        fetchManageService()
+    useEffect(() => {
+        fetch('https://peaceful-gorge-97236.herokuapp.com/services')
+            .then(res => res.json())
+            .then(data => {
+                setManageService(data);
+            })
     }, [])
 
     const handleDelete = id =>
     {
-       id && fetch(`http://localhost:5000/services/${ id }`, {
+       id && fetch(`https://peaceful-gorge-97236.herokuapp.com/services/${ id }`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
             }
         })
-            .then(res => fetchManageService())
+            .then(res => console.log(res))
             .then(error => console.log(error))
     }
 
