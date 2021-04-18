@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import { Spring } from 'react-spring';
-
+import './ServiceDetails.css';
 const ServiceDetails = ({ service }) => {
     return (
         <Link style={{ textDecoration: 'none' }} to={`/service/${service._id}`} className='col-md-4 text-center'>
-            <div className="mt-5">
+            <div id="animation" className="mt-5">
                 <h3 className="mt-4 mb-4">{service.name}</h3>
                 <img
                     style={{ height: "100px" }}
