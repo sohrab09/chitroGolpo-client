@@ -6,15 +6,15 @@ import Sidebar from '../Sidebar/Sidebar';
 const BookingList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
 
-    
+
     const [booking, setBooking] = useState([])
 
-    useEffect(() =>{
+    useEffect(() => {
         fetch(`https://peaceful-gorge-97236.herokuapp.com/bookingList?data.email=+loggedInUser.email`)
-        .then(res => res.json())
-        .then(data => filteredOrder(data))
-    },[])
-    console.log("From Booking List:",loggedInUser.email)
+            .then(res => res.json())
+            .then(data => filteredOrder(data))
+    }, [])
+    // console.log("From Booking List:",loggedInUser.email)
 
     const filteredOrder = (booking) => {
         console.log("Booking Data", booking[0].data.email)
@@ -29,7 +29,7 @@ const BookingList = () => {
                 <Sidebar />
             </div>
             <div className="col-md-10 col-sm-12 col-12 d-flex justify-content-center mt-5 pt-5 pb-5">
-                <h1>This is Booking List</h1>
+                <h1 className="text-center">Your Booking Area</h1>
                 {
                     booking.map(book => <BookingData book={book}></BookingData>)
                 }

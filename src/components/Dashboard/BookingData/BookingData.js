@@ -1,11 +1,17 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
 
-const BookingData = ({book}) => {
+const BookingData = ({ book }) => {
     return (
-        <div>
-            <h6>{book.data.name}</h6>
-            <h1>{book.data.email}</h1>
-            <p>{book.data.description}</p>
+        <div className="mt-5 mt-5 mt-5">
+            <div className="mt-5 mt-5 mt-5">
+            <Card style={{ width: '25rem' }}>
+                <Card.Body>
+                    <Card.Title>Your Booking Service: <br/> <strong>{book.data.name}</strong></Card.Title>
+                    <Card.Title>Service Price: {book.data.price}</Card.Title>
+                </Card.Body>
+            </Card>
+            </div>
         </div>
     );
 };

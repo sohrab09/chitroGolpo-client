@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Sidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import logo from '../../Image/logo.png';
 import { faHome, faUserShield, faShoppingCart, faList, faStarHalfAlt, faSort, faTasks } from '@fortawesome/free-solid-svg-icons';
 import { faAddressCard } from '@fortawesome/free-regular-svg-icons'
 import { Link } from 'react-router-dom';
@@ -25,7 +24,6 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     },[])
     return (
         <div className="sidebar d-flex flex-column justify-content-between col-md-2 py-5 px-4" style={{ height: "100vh" }}>
-            <img className="mb-5" src={logo} alt=""/>
             <ul className="list-unstyled">
                 <li>
                     <Link to="/" className="text-white">
@@ -33,7 +31,34 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
                     </Link>
                 </li>
                 <div>
+                    
+                    {
+                        isAdmin ? 
+
+                        <div>
+                            <li>
+                        <Link to="/orderList" className="text-white" >
+                            <FontAwesomeIcon icon={faSort} /> <span>Order List</span>
+                        </Link>
+                    </li>
                     <li>
+                        <Link to="/addService" className="text-white" >
+                            <FontAwesomeIcon icon={faAddressCard} /> <span>Add Service</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/makeAdmin" className="text-white" >
+                            <FontAwesomeIcon icon={faUserShield} /> <span>Make Admin</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/manageService" className="text-white" >
+                            <FontAwesomeIcon icon={faTasks} /> <span>Manage Service</span>
+                        </Link>
+                    </li>
+                        </div> : 
+                        <div>
+                            <li>
                         <Link to="/service/:id" className="text-white">
                             <FontAwesomeIcon icon={faShoppingCart} /> <span>Book</span>
                         </Link>
@@ -46,29 +71,6 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
                     <li>
                         <Link to="/addReview" className="text-white">
                             <FontAwesomeIcon icon={faStarHalfAlt} /> <span>Review</span>
-                        </Link>
-                    </li>
-                    {
-                        isAdmin && 
-                        <div>
-                            <li>
-                        <Link to="/orderList" className="text-white" >
-                            <FontAwesomeIcon icon={faSort} /> <span>Order List</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/addService" className="text-white" >
-                            <FontAwesomeIcon icon={faAddressCard} /> <span>Service</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/makeAdmin" className="text-white" >
-                            <FontAwesomeIcon icon={faUserShield} /> <span>Make Admin</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/manageService" className="text-white" >
-                            <FontAwesomeIcon icon={faTasks} /> <span>Manage Service</span>
                         </Link>
                     </li>
                         </div>
